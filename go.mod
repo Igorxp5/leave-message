@@ -1,5 +1,6 @@
 module github.com/igorxp5/leave-message
 
+// +heroku goVersion 1.17
 go 1.17
 
 require (

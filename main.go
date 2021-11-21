@@ -33,5 +33,9 @@ func main() {
 	if os.Getenv("HOST") != "" {
 		host = os.Getenv("HOST")
 	}
-	log.Fatal(app.Listen(host + ":3000"))
+	port := "3000"
+	if os.Getenv("PORT") != "" {
+		port = os.Getenv("PORT")
+	}
+	log.Fatal(app.Listen(host + ":" + port))
 }
