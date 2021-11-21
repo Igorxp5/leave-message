@@ -1,0 +1,18 @@
+extends views/base
+
+block content
+    .mb-3
+        p Leave a message to the next person.
+        form#form
+            label.form-label(for="message") Message
+            .input-group
+                input#message.form-control(name="message", placeholder="You're awesome. Have a nice day :)")
+                button.btn.btn-primary(type="submit") Send
+            input#clientId(type="hidden", value="{{.ClientId}}")
+    p Your session is going to expire in
+        strong#coutdown 
+            | 60
+        | seconds!
+
+block scripts
+    script(src='/static/message.js')

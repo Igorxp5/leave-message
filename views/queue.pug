@@ -1,0 +1,10 @@
+extends views/base
+
+block content
+    p.p-5.h3.text-center
+        | Your position is 
+        spsn#queuePosition.text-primary -
+        |. Wait for your turn!
+
+block scripts
+    script(src='/static/queue.js')

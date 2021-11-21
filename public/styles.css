@@ -1,0 +1,27 @@
+body {
+    background-color: #f0f0f0;
+}
+
+.header h1 {
+    font-size: 3em;
+}
+
+.quote p {
+    font-weight: 100;
+}
+
+.quote p:before, .quote p:after {
+    font-family: 'Fontawesome';
+}
+
+.quote p:before {
+    content: "\f10d";
+    float: left;
+    margin-right: 10px;
+}
+
+.quote p:after {
+    content: "\f10e";
+    float: right;
+    margin-left: 10px;
+}
