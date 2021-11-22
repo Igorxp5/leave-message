@@ -73,7 +73,9 @@ func RoutePostMessage(c *fiber.Ctx) error {
 		})
 	}
 	if currentClient, _ := clientQueue.First(); message == nil || currentClient == "" || currentClient == payload.ClientId {
-		defer queueNext()
+		defer func() {
+			postMessageChannel <- true
+		}()
 		message = &Message{payload.Text}
 		return c.JSON(&fiber.Map{
 			"text": message.Text,

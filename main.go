@@ -37,5 +37,7 @@ func main() {
 	if os.Getenv("PORT") != "" {
 		port = os.Getenv("PORT")
 	}
+
+	go routes.StartQueueManager()
 	log.Fatal(app.Listen(host + ":" + port))
 }

@@ -26,33 +26,10 @@ func WebSocket(c *websocket.Conn) {
 	var err error
 	clientId := uuid.New()
 
-	err = sendClientId(c, clientId.String())
-	if err != nil {
-		log.Println(err)
-		return
-	}
-
 	clients[clientId.String()] = c
 	defer delete(clients, clientId.String())
 
-	var index uint64
-
-	index, err = clientQueue.Add(clientId.String())
-	if err != nil {
-		err = sendError(c, clientId.String(), "Could not add you to the queue :(")
-		if err != nil {
-			return
-		}
-	}
-	if index != 0 {
-		defer clientQueue.Remove(clientId.String())
-	}
-
-	err = sendQueuePosition(c, clientId.String(), index+1)
-	if err != nil {
-		log.Println(err)
-		return
-	}
+	newClientChannel <- clientId.String()
 
 	for {
 		if _, _, err = c.ReadMessage(); err != nil {
@@ -61,6 +38,7 @@ func WebSocket(c *websocket.Conn) {
 		}
 	}
 
+	disconnectClientChannel <- clientId.String()
 	log.Printf("socket (%s) connection closed!", clientId)
 }
 
@@ -97,7 +75,7 @@ func broadcastQueuePosition() {
 	for clientId, c := range clients {
 		index, err = clientQueue.Index(clientId)
 		if err != nil {
-			log.Printf(fmt.Sprintf("socket (%s): %v", clientId, err))
+			log.Printf("[broadcastQueuePosition] socket (%s): %v", clientId, err)
 			continue
 		}
 		err = sendQueuePosition(c, clientId, index+1)

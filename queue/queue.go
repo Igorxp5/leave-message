@@ -127,6 +127,10 @@ func (queue *UniqueQueue) Size() uint64 {
 	return queue.size
 }
 
+func (queue *UniqueQueue) Empty() bool {
+	return queue.Size() == 0
+}
+
 func (queue *UniqueQueue) isIn(item string) bool {
 	_, ok := queue.nodeMap[item]
 	return ok
