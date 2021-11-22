@@ -1,4 +1,5 @@
-const socket = new WebSocket(`ws://${window.location.hostname}:${window.location.port}/ws`);
+const socketProtocol = (window.location.protocol == "https:") ? "wss" : "ws";
+const socket = new WebSocket(`${socketProtocol}://${window.location.hostname}:${window.location.port}/ws`);
 
 var clientId = null;
 

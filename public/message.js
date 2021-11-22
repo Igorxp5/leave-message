@@ -1,6 +1,6 @@
 var timer = 60;
 var timerInterval = setInterval(function() {
-    document.getElementById("coutdown").innerHTML = timer + " ";
+    document.getElementById("coutdown").innerHTML = ` ${timer} `;
     timer -= 1;
     if (timer == 0) {
         clearInterval(timerInterval);
