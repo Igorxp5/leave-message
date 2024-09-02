@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/template/pug"
+	"github.com/gofiber/template/pug/v2"
 	"github.com/gofiber/websocket/v2"
 	"github.com/igorxp5/leave-message/routes"
 )
